@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Response &amp; Operations</title>
+  <meta name="description" content="Municipal emergency response and incident management system." />
+  <link rel="preload" as="style" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
+    integrity="sha256-p4NxAoJB4IIN+Fylzhyp8H12Jx1P5M/M7qKzSgqJM/M="
+    crossorigin=""
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Top bar (auth + system status) -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="system-status" id="system-status">
+        <span class="dot"></span>
+        <span id="db-status">Connecting&hellip;</span>
+      </div>
+      <div class="top-actions" id="top-actions">
+        <!-- auth buttons injected here -->
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#dashboard" class="brand" aria-label="Emergency Response & Operations — home">
+        <span class="brand-mark">ER</span>
+        <span class="brand-name">
+          <strong>Emergency Response</strong><span class="brand-sub">Operations Center</span>
+        </span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="site-nav" id="site-nav">
+    <ul class="nav-list">
+      <li><a href="#dashboard" class="nav-link"><span class="icon">&#128203;</span>Dashboard</a></li>
+      <li><a href="#incidents" class="nav-link"><span class="icon">&#128204;</span>Incidents</a></li>
+      <li><a href="#report" class="nav-link"><span class="icon">&#128205;</span>Report Emergency</a></li>
+      <li><a href="#resources" class="nav-link"><span class="icon">&#128680;</span>Resources</a></li>
+      <li class="nav-divider"><hr /></li>
+      <li><a href="#admin" class="nav-link admin-link"><span class="icon">&#128274;</span>Administration</a></li>
+    </ul>
+    <div class="nav-footer">
+      <p class="org-name">Municipal Emergency Operations Center</p>
+      <p class="org-sub">Illustrative system &mdash; sample data only</p>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <main id="main-content" class="main" tabindex="-1" aria-label="Main content"></main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>Emergency Response &amp; Operations &mdash; illustrative prototype. All incident, unit, and personnel data is sample data.</p>
+      <p class="footer-version">v2.0 &middot; JSON file store</p>
+    </div>
+  </footer>
+
+  <!-- Login modal -->
+  <div class="modal" id="login-modal" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2 class="modal-title">Administrator Sign-In</h2>
+        <button class="modal-close" id="login-close" aria-label="Close">&#215;</button>
+      </div>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="login-username">Username</label>
+          <input id="login-username" type="text" required placeholder="admin" />
+        </div>
+        <div class="field">
+          <label for="login-password">Password</label>
+          <input id="login-password" type="password" required />
+        </div>
+        <p class="form-hint">Demo credentials: admin / admin123</p>
+        <div class="field-error" id="login-error"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="login-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+    referrerpolicy="no-referrer"
+    defer
+  ></script>
+  <script type="module">
+    import "./js/api.js";
+    import "./js/app.js";
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "nubase": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "nubase_cli@0.3.0"
+      ],
+      "env": {
+        "NUBASE_AGENT_ID": "claude-code",
+        "NUBASE_CONFIG": "C:\\faizal\\cobot_ex\\emergency-response\\.nubase\\config.json",
+        "NUBASE_ALLOW_SQL_EXECUTE": "true",
+        "NUBASE_ALLOW_ADMIN_WRITE": "true"
+      }
+    }
+  }
+}

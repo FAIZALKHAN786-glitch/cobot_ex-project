@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administration | Emergency Response</title>
+  <meta name="description" content="Secure administration for the municipal emergency operations center." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="admin-page">
+  <a class="skip-link" href="#main-content">Skip to administration</a>
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="system-status" id="system-status"><span class="dot"></span><span id="db-status">Connecting…</span></div>
+      <div class="top-actions" id="top-actions"></div>
+    </div>
+  </div>
+  <header class="site-header admin-header">
+    <div class="header-inner">
+      <a href="/" class="brand" aria-label="Emergency Response home">
+        <span class="brand-mark">ER</span>
+        <span class="brand-name"><strong>Operations Center</strong><span class="brand-sub">Administration</span></span>
+      </a>
+      <a class="btn btn-ghost" href="/">← Return to operations</a>
+    </div>
+  </header>
+  <main id="main-content" class="main admin-main" tabindex="-1" aria-label="Administration"></main>
+  <footer class="site-footer"><div class="footer-inner"><p>Emergency Response &amp; Operations · Administration</p><p class="footer-version">Authorized administrators</p></div></footer>
+  <div class="modal" id="login-modal" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-header"><h2 class="modal-title">Administrator sign-in</h2><button class="modal-close" id="login-close" aria-label="Close">×</button></div>
+      <form id="login-form" novalidate>
+        <div class="field"><label for="login-username">Username</label><input id="login-username" type="text" required autocomplete="username" /></div>
+        <div class="field"><label for="login-password">Password</label><input id="login-password" type="password" required autocomplete="current-password" /></div>
+        <div class="field-error" id="login-error"></div>
+        <div class="modal-footer"><a class="btn btn-ghost" href="/">Return to operations</a><button type="submit" class="btn btn-primary">Sign in</button></div>
+      </form>
+    </div>
+  </div>
+  <script type="module">
+    import "./assets/js/api.js";
+    import "./assets/js/app.js";
+    if (!location.hash) location.hash = "#admin";
+  </script>
+</body>
+</html>

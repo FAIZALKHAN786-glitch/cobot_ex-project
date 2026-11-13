@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 357 91% 53%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 357 91% 65%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 357 91% 53%;
+    --radius: 0.75rem;
+
+    /* Semantic severity colors (refined) */
+    --severity-low: 199 89% 48%;
+    --severity-medium: 43 96% 56%;
+    --severity-high: 25 100% 53%;
+    --severity-critical: 357 91% 53%;
+
+    /* Custom easing curves (emil-design-eng: never built-in ease-in) */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --primary: 357 91% 53%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 357 91% 65%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 357 91% 53%;
+  }
+}
+
+@layer base {
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 0.1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Selection color */
+  ::selection {
+    background-color: hsl(var(--primary) / 0.3);
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Remove spin on reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-spin {
+      animation: none;
+    }
+  }
+}
+
+/* ── Glassmorphism utilities ── */
+@layer components {
+  .glass {
+    background: hsl(var(--background) / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.4);
+  }
+
+  .glass-strong {
+    background: hsl(var(--background) / 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: 0 8px 32px hsl(var(--foreground) / 0.08);
+  }
+
+  .glass-card {
+    background: hsl(var(--background) / 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--border) / 0.35);
+    box-shadow: 0 4px 20px hsl(var(--foreground) / 0.06);
+  }
+}
+
+/* ── Entry animations (@starting-style, no JS mount needed) ── */
+@layer utilities {
+  .animate-enter {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 350ms var(--ease-out),
+      transform 350ms var(--ease-out);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+
+  .animate-fade-in {
+    opacity: 1;
+    transition: opacity 300ms var(--ease-out);
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  .animate-scale-in {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 250ms var(--ease-out),
+      transform 250ms var(--ease-out);
+
+    @starting-style {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  /* Stagger delays for list entries */
+  .stagger-0 { animation-delay: 0ms; }
+  .stagger-1 { animation-delay: 60ms; }
+  .stagger-2 { animation-delay: 120ms; }
+  .stagger-3 { animation-delay: 180ms; }
+  .stagger-4 { animation-delay: 240ms; }
+  .stagger-5 { animation-delay: 300ms; }
+
+  /* Reduced motion: drop transform movement, keep opacity */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-enter,
+    .animate-fade-in,
+    .animate-scale-in {
+      transition: none;
+      animation: none;
+    }
+    .animate-enter {
+      @starting-style {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in {
+      @starting-style {
+        opacity: 1;
+      }
+    }
+    .animate-scale-in {
+      @starting-style {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .stagger-0,
+    .stagger-1,
+    .stagger-2,
+    .stagger-3,
+    .stagger-4,
+    .stagger-5 {
+      animation-delay: 0ms;
+    }
+  }
+
+  /* Touch device hover gating */
+  @media (hover: hover) and (pointer: fine) {
+    .hover-lift:hover {
+      transform: translateY(-2px);
+    }
+    .hover-glow:hover {
+      box-shadow: 0 0 24px hsl(var(--primary) / 0.25);
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-shadow {
+    text-shadow: 0 1px 2px hsl(var(--foreground) / 0.1);
+  }
+}
